@@ -12,18 +12,16 @@ class  login_process{
         if ($_POST['action'] == 'login') {
             $username = trim($_POST['username']);
             $pass = trim($_POST['password']);
-            $password = md5($pass);
-            $qformat = 'select * from usuario where nom_usu = "%s" ';
-            $query = sprintf($qformat, $username);
+            $qformat = 'select * from usuario where nom_usu = "%s" and pass_usu = "%s"';
+            $query = sprintf($qformat, $username, $pass);
             $row = $this->db->row($query);
-
-            if ($row['pass_usu'] == $password && $row['nom_usu']==$username)
+            if ($row['pass_usu'] == $pass && $row['nom_usu']==$username)
             {
                 $_SESSION['user_session'] = (int)$row ['id'];
             } else {
                 $row[] = "user or password does not exist.";
             }
-        }
+        };
         return $row;
 
     }
@@ -34,6 +32,16 @@ class  login_process{
         $row=$this->db->row($query);
         return $row;
     }
+
+    function logout(){
+        session_destroy();
+        session_unset();
+
+         exit;
+    }
+
+
+
 
 }
 

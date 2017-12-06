@@ -9,4 +9,5 @@ switch ($params['action']) {
         echo json_encode($output);
         die;
         break;
+
 }

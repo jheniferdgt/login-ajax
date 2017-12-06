@@ -21,7 +21,17 @@ $( document ).ready(function() {
         return false;
     });
 
+    $(document).on('click', '#btn-out', function(e) {
+           console.log('okboton');
+            $.ajax({
+                url: 'logout.php',
+                success: function (rs) {
+                   window.location.href = "index.php";
+                }
+            });
 
-
+        e.preventDefault();
+        return false;
+    });
 });
 
